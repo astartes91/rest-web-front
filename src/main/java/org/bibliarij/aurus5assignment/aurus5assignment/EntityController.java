@@ -1,7 +1,6 @@
 package org.bibliarij.aurus5assignment.aurus5assignment;
 
 import io.swagger.annotations.ApiOperation;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,8 +23,8 @@ public abstract class EntityController {
     @RequestMapping(method = RequestMethod.GET)
     public List getEntities(){
 
-        return getRepository().findAll();
+        return getEntityService().findAll();
     }
 
-    protected abstract JpaRepository getRepository();
+    protected abstract EntityService getEntityService();
 }

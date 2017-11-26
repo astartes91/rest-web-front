@@ -34,8 +34,8 @@ public class Product {
     @Column(nullable = false)
     private Date additionDate;
 
-    @Lob
-    private byte[] picture;
+    /*@Lob
+    private byte[] picture;*/
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
