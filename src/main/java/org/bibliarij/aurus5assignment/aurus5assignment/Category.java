@@ -3,7 +3,6 @@ package org.bibliarij.aurus5assignment.aurus5assignment;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Category entity class
@@ -23,7 +22,4 @@ public class Category {
     private String name;
 
     private String description;
-
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private List<Product> products;
 }

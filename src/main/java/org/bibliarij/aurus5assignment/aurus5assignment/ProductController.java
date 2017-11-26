@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Spring REST controller for {@link Category} entity
+ * Spring REST controller for {@link Product} entity
  *
- * @author Vladimir Nizamutdinov
+ * @author Vladimir Nizamutdinov (astartes91@gmail.com)
  */
-@Api("REST controller for Category entity")
-@RequestMapping("/categories")
+@Api("REST controller for Product entity")
+@RequestMapping("/products")
 @RestController
-public class CategoryController extends EntityController {
+public class ProductController extends EntityController {
 
     @Autowired
-    private CategoryRepository repository;
+    private ProductRepository repository;
 
     @Override
     protected JpaRepository getRepository() {
