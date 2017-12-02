@@ -14,4 +14,17 @@ public interface EntityService {
      * @return
      */
     List findAll();
+
+    /**
+     * Create new entity
+     * @param entity
+     * @return
+     */
+    Object create(Object entity);
+
+    /**
+     * Delete entity by od
+     * @param id
+     */
+    void delete(Long id);
 }

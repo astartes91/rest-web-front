@@ -22,4 +22,25 @@ public abstract class EntityServiceImpl implements EntityService {
     public List findAll() {
         return getRepository().findAll();
     }
+
+    /**
+     * Create new entity
+     *
+     * @param entity
+     * @return
+     */
+    @Override
+    public Object create(Object entity) {
+        return getRepository().save(entity);
+    }
+
+    /**
+     * Delete entity by od
+     *
+     * @param id
+     */
+    @Override
+    public void delete(Long id) {
+        getRepository().delete(id);
+    }
 }
