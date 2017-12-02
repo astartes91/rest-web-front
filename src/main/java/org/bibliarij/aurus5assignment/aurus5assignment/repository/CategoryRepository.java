@@ -1,5 +1,6 @@
-package org.bibliarij.aurus5assignment.aurus5assignment;
+package org.bibliarij.aurus5assignment.aurus5assignment.repository;
 
+import org.bibliarij.aurus5assignment.aurus5assignment.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

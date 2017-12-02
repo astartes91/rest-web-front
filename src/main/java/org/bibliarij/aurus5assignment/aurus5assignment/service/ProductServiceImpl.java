@@ -1,5 +1,8 @@
-package org.bibliarij.aurus5assignment.aurus5assignment;
+package org.bibliarij.aurus5assignment.aurus5assignment.service;
 
+import org.bibliarij.aurus5assignment.aurus5assignment.entity.Category;
+import org.bibliarij.aurus5assignment.aurus5assignment.entity.Product;
+import org.bibliarij.aurus5assignment.aurus5assignment.repository.ProductRepository;
 import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;

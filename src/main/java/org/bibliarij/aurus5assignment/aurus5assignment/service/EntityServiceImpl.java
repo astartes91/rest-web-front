@@ -1,4 +1,4 @@
-package org.bibliarij.aurus5assignment.aurus5assignment;
+package org.bibliarij.aurus5assignment.aurus5assignment.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
