@@ -1,8 +1,14 @@
 $(document).ready(
     function () {
-        $("showCategoriesButton").click(
+        $("#showCategoriesButton").click(
             function () {
                 getCategories();
+            }
+        );
+
+        $("#createNewCategoryButton").click(
+            function () {
+                $("#categoryCreationDiv").dialog();
             }
         );
 
@@ -15,7 +21,7 @@ function getCategories() {
     $.get(
         "/categories",
         function (data) {
-            var rows = $("#categoriesTable").children();
+            var rows = $("#categoriesTable").find("> tbody").children();
             for (var i = 1; i < rows.length; i++){
                 rows[i].remove();
             }
@@ -30,7 +36,7 @@ function getCategories() {
                 row.append($("<td>" + name + "</td>"));
                 row.append($("<td>" + description + "</td>"));
 
-                $("#categoriesTable tr:last").after(row);
+                $("#categoriesTable").find("tr:last").after(row);
             }
         }
     );

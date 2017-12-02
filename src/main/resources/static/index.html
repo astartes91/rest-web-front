@@ -1,7 +1,9 @@
 <html>
     <head>
-        <script src="jquery-3.2.1.js"></script>
-        <script src="script.js"></script>
+        <script src="js/jquery-3.2.1.js"></script>
+		<script src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
+        <script src="js/script.js"></script>
+		<link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css">
 		<meta charset="UTF-8">
 		<style>
 			table, th, td {
@@ -27,5 +29,16 @@
 				</tr>
 			</table>
     	</div>
+
+		<div id="categoryCreationDiv" hidden>
+			<form>
+				<fieldset>
+					<label for="categoryNameInput">Имя</label>
+					<input type="text" id="categoryNameInput" />
+					<label for="categoryDescriptionInput">Описание</label>
+					<input type="text" id="categoryDescriptionInput" />
+				</fieldset>
+			</form>
+		</div>
     </body>
 </html>
