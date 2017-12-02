@@ -2,8 +2,30 @@
     <head>
         <script src="jquery-3.2.1.js"></script>
         <script src="script.js"></script>
+		<meta charset="UTF-8">
+		<style>
+			table, th, td {
+				border: black 1px solid;
+				border-collapse: collapse;
+			}
+		</style>
     </head>
     <body>
-        <h1>Hello!</h1>
+    	<div id="categoriesDiv">
+			<h3>Категории</h3>
+	    	<input type="submit" value="Вернуться к списку категорий" id="showCategoriesButton" />
+	    	<input type="submit" value="Создать новую категорию" id="createNewCategoryButton" />
+			<br/>
+			<br/>
+	    	<table style="width: 100%; " id="categoriesTable">
+				<tr>
+					<th>Имя</th>
+					<th>Описание</th>
+					<th>Просмотр списка товаров</th>
+					<th>Редактировать</th>
+					<th>Удалить</th>
+				</tr>
+			</table>
+    	</div>
     </body>
 </html>
