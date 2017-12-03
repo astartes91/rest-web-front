@@ -18,7 +18,7 @@ import java.util.List;
  * @author Vladimir Nizamutdinov (astartes91@gmail.com)
  */
 @Service
-public class ProductServiceImpl extends EntityServiceImpl {
+public class ProductServiceImpl extends EntityServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository repository;
@@ -53,6 +53,19 @@ public class ProductServiceImpl extends EntityServiceImpl {
         Product product = (Product) getRepository().findOne(id);
         unproxyCategory(product);
         return product;
+    }
+
+    /**
+     * Get products by category id
+     *
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<Product> getProductsByCategoryId(Long categoryId) {
+        List<Product> products = repository.getByCategoryId(categoryId);
+        products.forEach(ProductServiceImpl::unproxyCategory);
+        return products;
     }
 
     private static void unproxyCategory(Product product) {

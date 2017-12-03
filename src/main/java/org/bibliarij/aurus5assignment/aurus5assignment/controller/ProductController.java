@@ -4,12 +4,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.bibliarij.aurus5assignment.aurus5assignment.entity.Product;
 import org.bibliarij.aurus5assignment.aurus5assignment.service.EntityService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.bibliarij.aurus5assignment.aurus5assignment.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Spring REST controller for {@link Product} entity
@@ -21,8 +20,14 @@ import javax.annotation.Resource;
 @RestController
 public class ProductController extends EntityController {
 
-    @Resource(name = "productServiceImpl")
-    private EntityService service;
+    @Autowired
+    private ProductService service;
+
+    @ApiOperation("Get products by category id")
+    @RequestMapping(method = RequestMethod.GET, value = "/category/{id}")
+    public List<Product> getProducts(@PathVariable(value = "id") Long categoryId){
+        return service.getProductsByCategoryId(categoryId);
+    }
 
     /**
      * REST endpoint for creating new entity

@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Spring Data repository for {@link Product} entity
  *
@@ -22,4 +24,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Modifying
     @Query("DELETE FROM Product p WHERE p.category.id = :categoryId")
     void deleteByCategoryId(@Param("categoryId") Long categoryId);
+
+    /**
+     * Get products by specified category id
+     * @param categoryId
+     * @return
+     */
+    @Query("SELECT p FROM Product p WHERE p.category.id = :categoryId")
+    List<Product> getByCategoryId(@Param("categoryId") Long categoryId);
 }
