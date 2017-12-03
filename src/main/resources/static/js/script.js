@@ -8,7 +8,7 @@ $(document).ready(
 );
 
 function createNewCategory () {
-    var dialog = $("#categoryCreationDiv").dialog(
+    var dialog = $("#categoryCreationUpdateDiv").dialog(
         {
             width: 400,
             title: "Создать новую категорию",
@@ -58,8 +58,8 @@ function getCategories() {
                 row.append($("<td>" + name + "</td>"));
                 row.append($("<td>" + description + "</td>"));
                 row.append($("<td><input type='submit' value='Просмотр'/></td>"));
-                row.append($("<td><input type='submit' value='Редактировать'/></td>"));
-                row.append($("<td><input type='submit' value='Удалить' onclick='deleteEntity(" + id + ")'/></td>"));
+                row.append($("<td><input type='submit' value='Редактировать' onclick='updateCategory(" + id + ")'/></td>"));
+                row.append($("<td><input type='submit' value='Удалить' onclick='deleteCategory(" + id + ")'/></td>"));
 
                 $("#categoriesTable").find("tr:last").after(row);
             }
@@ -67,7 +67,47 @@ function getCategories() {
     );
 }
 
-function deleteEntity(id) {
+function updateCategory(id) {
+
+    $.get(
+        "/categories/" + id,
+        function (data) {
+            $("#categoryCreationUpdateDiv").find("#categoryNameInput").val(data.name);
+            $("#categoryCreationUpdateDiv").find("#categoryDescriptionInput").val(data.description);
+
+            var dialog = $("#categoryCreationUpdateDiv").dialog(
+                {
+                    width: 400,
+                    title: "Обновить категорию",
+                    buttons: {
+                        "Обновить": function () {
+                            $.ajax(
+                                {
+                                    type: "PUT",
+                                    url: "/categories",
+                                    data: JSON.stringify(
+                                        {
+                                            id: data.id,
+                                            name: $("#categoryNameInput").val(),
+                                            description: $("#categoryDescriptionInput").val()
+                                        }
+                                    ),
+                                    success: function (data) {
+                                        dialog.dialog("close");
+                                        getCategories();
+                                    },
+                                    contentType: 'application/json'
+                                }
+                            );
+                        }
+                    }
+                }
+            );
+        }
+    );
+}
+
+function deleteCategory(id) {
     $.ajax(
         {
             url: "/categories/" + id,

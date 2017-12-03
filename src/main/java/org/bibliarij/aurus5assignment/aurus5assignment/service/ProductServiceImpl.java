@@ -29,24 +29,38 @@ public class ProductServiceImpl extends EntityServiceImpl {
     }
 
     /**
-     * Find all entities
+     * Get all entities
      *
      * @return
      */
     @Transactional
     @Override
-    public List findAll() {
+    public List getAll() {
         List<Product> result = getRepository().findAll();
-        result.forEach(
-                product -> {
-                    Category category = product.getCategory();
-                    Hibernate.initialize(category);
-                    category = (Category) ((HibernateProxy) category)
-                            .getHibernateLazyInitializer()
-                            .getImplementation();
-                    product.setCategory(category);
-                }
-        );
+        result.forEach(ProductServiceImpl::unproxyCategory);
         return result;
+    }
+
+    /**
+     * Get entity by id
+     *
+     * @param id
+     * @return
+     */
+    @Transactional
+    @Override
+    public Object get(Long id) {
+        Product product = (Product) getRepository().findOne(id);
+        unproxyCategory(product);
+        return product;
+    }
+
+    private static void unproxyCategory(Product product) {
+        Category category = product.getCategory();
+        Hibernate.initialize(category);
+        category = (Category) ((HibernateProxy) category)
+                .getHibernateLazyInitializer()
+                .getImplementation();
+        product.setCategory(category);
     }
 }

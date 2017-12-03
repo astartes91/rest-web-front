@@ -23,7 +23,18 @@ public abstract class EntityController {
     @RequestMapping(method = RequestMethod.GET)
     public List getEntities(){
 
-        return getEntityService().findAll();
+        return getEntityService().getAll();
+    }
+
+    /**
+     * REST endpoint for getting entity by id
+     * @return
+     */
+    @ApiOperation("Getting entity by id")
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public Object getEntitiy(@PathVariable Long id){
+
+        return getEntityService().get(id);
     }
 
     /**

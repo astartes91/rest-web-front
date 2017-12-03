@@ -35,6 +35,18 @@ public class CategoryController extends EntityController {
         return getEntityService().create(entity);
     }
 
+    /**
+     * REST endpoint for updating existing entity
+     * @param entity
+     * @return
+     */
+    @ApiOperation("Update existing entity")
+    @RequestMapping(method = RequestMethod.PUT)
+    public Object update(@RequestBody Category entity){
+
+        return getEntityService().update(entity);
+    }
+
     @Override
     protected EntityService getEntityService() {
         return service;

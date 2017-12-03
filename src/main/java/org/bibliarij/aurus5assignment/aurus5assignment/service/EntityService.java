@@ -10,10 +10,17 @@ import java.util.List;
 public interface EntityService {
 
     /**
-     * Find all entities
+     * Get all entities
      * @return
      */
-    List findAll();
+    List getAll();
+
+    /**
+     * Get entity by id
+     * @param id
+     * @return
+     */
+    Object get(Long id);
 
     /**
      * Create new entity
@@ -21,6 +28,13 @@ public interface EntityService {
      * @return
      */
     Object create(Object entity);
+
+    /**
+     * Update existing entity
+     * @param entity
+     * @return
+     */
+    Object update(Object entity);
 
     /**
      * Delete entity by od
