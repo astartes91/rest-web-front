@@ -1,3 +1,4 @@
+//Columbia Pictures не представляет, как хорошо мне с jQuery бывает!
 $(document).ready(
     function () {
         $("#showCategoriesButton").click(getCategories);
@@ -58,7 +59,9 @@ function getCategories() {
                 row.append($("<td>" + name + "</td>"));
                 row.append($("<td>" + description + "</td>"));
                 row.append($("<td><input type='submit' value='Просмотр'/></td>"));
-                row.append($("<td><input type='submit' value='Редактировать' onclick='updateCategory(" + id + ")'/></td>"));
+                row.append(
+                    $("<td><input type='submit' value='Редактировать' onclick='updateCategory(" + id + ")'/></td>")
+                );
                 row.append($("<td><input type='submit' value='Удалить' onclick='deleteCategory(" + id + ")'/></td>"));
 
                 $("#categoriesTable").find("tr:last").after(row);
@@ -72,8 +75,8 @@ function updateCategory(id) {
     $.get(
         "/categories/" + id,
         function (data) {
-            $("#categoryCreationUpdateDiv").find("#categoryNameInput").val(data.name);
-            $("#categoryCreationUpdateDiv").find("#categoryDescriptionInput").val(data.description);
+            $("#categoryNameInput").val(data.name);
+            $("#categoryDescriptionInput").val(data.description);
 
             var dialog = $("#categoryCreationUpdateDiv").dialog(
                 {
@@ -93,6 +96,8 @@ function updateCategory(id) {
                                         }
                                     ),
                                     success: function (data) {
+                                        $("#categoryNameInput").val("");
+                                        $("#categoryDescriptionInput").val("");
                                         dialog.dialog("close");
                                         getCategories();
                                     },

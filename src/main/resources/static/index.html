@@ -15,14 +15,13 @@
     <body>
     	<div id="categoriesDiv">
 			<h3>Категории</h3>
-	    	<input type="submit" value="Вернуться к списку категорий" id="showCategoriesButton" />
 	    	<input type="submit" value="Создать новую категорию" id="createNewCategoryButton" />
 			<br/>
 			<br/>
-	    	<table style="width: 100%; " id="categoriesTable">
+	    	<table id="categoriesTable">
 				<tr>
-					<th>Имя</th>
-					<th>Описание</th>
+					<th>Наименование</th>
+					<th>Краткое описание</th>
 					<th>Просмотр списка товаров</th>
 					<th>Редактировать</th>
 					<th>Удалить</th>
@@ -30,13 +29,33 @@
 			</table>
     	</div>
 
+        <div id="productsDiv" hidden>
+            <h3>Продукты</h3>
+            <input type="submit" value="Вернуться к списку категорий" id="showCategoriesButton" />
+            <input type="submit" value="Создать новый продукт" id="createNewProductButton" />
+            <br/>
+            <br/>
+            <table id="productsTable">
+                <tr>
+                    <th>Наименование</th>
+                    <th>Описание</th>
+                    <th>Производитель</th>
+                    <th>Цена</th>
+                    <th>Дата добавления в каталог</th>
+                    <th>Категория</th>
+                    <th>Редактировать</th>
+                    <th>Удалить</th>
+                </tr>
+            </table>
+        </div>
+
 		<div id="categoryCreationUpdateDiv" hidden>
 			<form>
 				<fieldset>
-					<label for="categoryNameInput">Имя</label>
+					<label for="categoryNameInput">Наименование</label>
 					<input type="text" id="categoryNameInput" />
 					<br />
-					<label for="categoryDescriptionInput">Описание</label>
+					<label for="categoryDescriptionInput">Краткое описание</label>
 					<input type="text" id="categoryDescriptionInput" />
 				</fieldset>
 			</form>
