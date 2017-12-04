@@ -3,6 +3,7 @@ $(document).ready(
     function () {
         $("#showCategoriesButton").click(getCategories);
         $("#createNewCategoryButton").click(createNewCategory);
+        $("#createNewProductButton").click(createNewProduct);
 
         getCategories();
     }
@@ -143,7 +144,7 @@ function viewProducts(categoryId) {
                 var description = element.description;
                 var id = element.id;
                 var manufacturer = element.manufacturer;
-                var price = element.manufacturer;
+                var price = element.price;
                 var additionDate = element.additionDate;
                 var category = element.category;
 
@@ -153,7 +154,7 @@ function viewProducts(categoryId) {
                 row.append($("<td>" + manufacturer + "</td>"));
                 row.append($("<td>" + price + "</td>"));
                 row.append($("<td>" + additionDate + "</td>"));
-                row.append($("<td>" + category + "</td>"));
+                row.append($("<td>" + category.name + "</td>"));
                 row.append(
                     $("<td><input type='submit' value='Редактировать' onclick='updateProduct(" + id + ")'/></td>")
                 );
@@ -163,7 +164,72 @@ function viewProducts(categoryId) {
             }
 
             $("#categoriesDiv").hide();
+
             $("#productsDiv").show();
+        }
+    );
+}
+
+function createNewProduct () {
+
+    $.get(
+        "/categories",
+        function (data) {
+            for (var i = 0; i < data.length; i++){
+
+            }
+        }
+    );
+    $("productCategorySelect").append();
+
+    var dialog = $("#productCreationUpdateDiv").dialog(
+        {
+            width: 400,
+            title: "Создать новый продукт",
+            buttons: {
+                "Создать": function () {
+                    $.ajax(
+                        {
+                            type: "POST",
+                            url: "/products",
+                            data: JSON.stringify(
+                                {
+                                    name: $("#productNameInput").val(),
+                                    description: $("#productDescriptionInput").val(),
+                                    manufacturer: $("#productManufacturerInput").val(),
+                                    price: $("#productPriceInput").val()
+                                }
+                            ),
+                            success: function (data) {
+                                dialog.dialog("close");
+                                getCategories();
+                            },
+                            contentType: 'application/json'
+                        }
+                    );
+                }
+            }
+        }
+    );
+}
+
+function deleteProduct(id) {
+
+    $.get(
+        "/products/" + id,
+        function (data) {
+
+            var categoryId = data.category.id;
+
+            $.ajax(
+                {
+                    url: "/products/" + id,
+                    type: "DELETE",
+                    success: function (data) {
+                        viewProducts(categoryId);
+                    }
+                }
+            );
         }
     );
 }

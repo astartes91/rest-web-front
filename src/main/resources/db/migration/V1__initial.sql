@@ -16,12 +16,12 @@ CREATE TABLE public.product (
   FOREIGN KEY(category_id) REFERENCES public.category(id)
 );
 
-INSERT INTO public.category(name, description) VALUES ('CATEGORY1', 'CATEGORY1');
+INSERT INTO public.category(name, description) VALUES ('CATEGORY1', 'CATEGORY1_DESC');
 INSERT INTO public.product(name, description, manufacturer, price, addition_date, //picture,
                            category_id)
 VALUES (
   'PRODUCT1',
-  'CATEGORY1',
+  'PRODUCT1_DESC',
   'MANUFACTURER1',
   100,
   PARSEDATETIME('2011-11-11 11:11:11',  'yyyy-MM-dd hh:mm:ss'),
