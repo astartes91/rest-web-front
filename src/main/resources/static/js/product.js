@@ -43,14 +43,25 @@ function viewProducts(categoryId) {
 function createNewProduct () {
 
     $.get(
-        "/categories",
-        function (data) {
-            for (var i = 0; i < data.length; i++){
+        {
+            url: "/categories",
+            success: function (data) {
 
-            }
+                var children = $("#productCategorySelect").children();
+                for (var i = 0; i < children.length; i++){
+                    children[i].remove();
+                }
+
+                for (var i = 0; i < data.length; i++){
+                    var category = data[i];
+                    $("#productCategorySelect").append(
+                        $('<option categoryId="' + category.id + '">' + category.name + '</option>')
+                    );
+                }
+            },
+            async: false
         }
     );
-    $("productCategorySelect").append();
 
     var dialog = $("#productCreationUpdateDiv").dialog(
         {
@@ -67,7 +78,8 @@ function createNewProduct () {
                                     name: $("#productNameInput").val(),
                                     description: $("#productDescriptionInput").val(),
                                     manufacturer: $("#productManufacturerInput").val(),
-                                    price: $("#productPriceInput").val()
+                                    price: $("#productPriceInput").val(),
+                                    category: {id: $("#productCategorySelect")}
                                 }
                             ),
                             success: function (data) {
