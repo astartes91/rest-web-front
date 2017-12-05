@@ -23,21 +23,14 @@ public interface EntityService {
     Object get(Long id);
 
     /**
-     * Create new entity
+     * Save entity
      * @param entity
      * @return
      */
-    Object create(Object entity);
+    Object save(Object entity);
 
     /**
-     * Update existing entity
-     * @param entity
-     * @return
-     */
-    Object update(Object entity);
-
-    /**
-     * Delete entity by od
+     * Delete entity by id
      * @param id
      */
     void delete(Long id);

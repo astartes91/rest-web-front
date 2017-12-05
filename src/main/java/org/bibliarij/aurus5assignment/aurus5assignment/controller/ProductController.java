@@ -37,7 +37,7 @@ public class ProductController extends EntityController {
     @ApiOperation("Create new entity")
     @RequestMapping(method = RequestMethod.POST)
     public Object create(@RequestBody Product entity){
-        return getEntityService().create(entity);
+        return service.create(entity);
     }
 
     /**
@@ -49,7 +49,7 @@ public class ProductController extends EntityController {
     @RequestMapping(method = RequestMethod.PUT)
     public Object update(@RequestBody Product entity){
 
-        return getEntityService().update(entity);
+        return service.update(entity);
     }
 
     @Override

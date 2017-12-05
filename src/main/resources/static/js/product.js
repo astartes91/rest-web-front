@@ -55,7 +55,7 @@ function createNewProduct () {
                 for (var i = 0; i < data.length; i++){
                     var category = data[i];
                     $("#productCategorySelect").append(
-                        $('<option categoryId="' + category.id + '">' + category.name + '</option>')
+                        $('<option value="' + category.id + '">' + category.name + '</option>')
                     );
                 }
             },
@@ -79,7 +79,7 @@ function createNewProduct () {
                                     description: $("#productDescriptionInput").val(),
                                     manufacturer: $("#productManufacturerInput").val(),
                                     price: $("#productPriceInput").val(),
-                                    category: {id: $("#productCategorySelect")}
+                                    category: {id: $("#productCategorySelect").val()}
                                 }
                             ),
                             success: function (data) {

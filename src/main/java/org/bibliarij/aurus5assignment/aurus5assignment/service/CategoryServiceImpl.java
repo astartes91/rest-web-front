@@ -1,5 +1,6 @@
 package org.bibliarij.aurus5assignment.aurus5assignment.service;
 
+import com.google.common.base.Preconditions;
 import org.bibliarij.aurus5assignment.aurus5assignment.entity.Category;
 import org.bibliarij.aurus5assignment.aurus5assignment.repository.CategoryRepository;
 import org.bibliarij.aurus5assignment.aurus5assignment.repository.ProductRepository;
@@ -15,7 +16,7 @@ import javax.transaction.Transactional;
  * @author Vladimir Nizamutdinov (astartes91@gmail.com)
  */
 @Service
-public class CategoryServiceImpl extends EntityServiceImpl {
+public class CategoryServiceImpl extends EntityServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -24,7 +25,21 @@ public class CategoryServiceImpl extends EntityServiceImpl {
     private ProductRepository productRepository;
 
     /**
-     * Delete entity by od
+     * Update existing entity
+     *
+     * @param entity
+     * @return
+     */
+    @Override
+    public Category update(Category entity) {
+        Preconditions.checkNotNull(entity.getId());
+
+        save(entity);
+        return entity;
+    }
+
+    /**
+     * Delete entity by id
      *
      * @param id
      */
