@@ -51,6 +51,8 @@ function createNewCategory () {
                                 }
                             ),
                             success: function (data) {
+                                $("#categoryNameInput").val("");
+                                $("#categoryDescriptionInput").val("");
                                 dialog.dialog("close");
                                 getCategories();
                             },

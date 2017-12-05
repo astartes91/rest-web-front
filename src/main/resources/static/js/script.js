@@ -3,7 +3,6 @@ $(document).ready(
     function () {
         $("#showCategoriesButton").click(getCategories);
         $("#createNewCategoryButton").click(createNewCategory);
-        $("#createNewProductButton").click(createNewProduct);
 
         getCategories();
     }

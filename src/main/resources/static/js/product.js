@@ -35,12 +35,18 @@ function viewProducts(categoryId) {
 
             $("#categoriesDiv").hide();
 
+            $("#createNewProductButton").prop('onclick',null).off('click');
+            $("#createNewProductButton").click(
+                function () {
+                    createNewProduct(categoryId);
+                }
+            );
             $("#productsDiv").show();
         }
     );
 }
 
-function createNewProduct () {
+function createNewProduct(categoryId) {
 
     $.get(
         {
@@ -83,8 +89,12 @@ function createNewProduct () {
                                 }
                             ),
                             success: function (data) {
+                                $("#productNameInput").val("");
+                                $("#productDescriptionInput").val("");
+                                $("#productManufacturerInput").val("");
+                                $("#productPriceInput").val("");
                                 dialog.dialog("close");
-                                getCategories();
+                                viewProducts(categoryId);
                             },
                             contentType: 'application/json'
                         }
