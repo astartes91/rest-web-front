@@ -78,7 +78,7 @@ function updateProduct(id) {
     fillCategoriesSelect();
 
     $.get(
-        '/products' + id,
+        '/products/' + id,
         function (data) {
             $("#productNameInput").val(data.name);
             $("#productDescriptionInput").val(data.description);
