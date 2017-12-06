@@ -52,7 +52,8 @@ function createNewCategory () {
                         }
                     );
                 }
-            }
+            },
+            close: clearCategoryInputs
         }
     );
 }
@@ -87,7 +88,8 @@ function updateCategory(id) {
                                 }
                             );
                         }
-                    }
+                    },
+                    close: clearCategoryInputs
                 }
             );
         }
@@ -107,8 +109,7 @@ function deleteCategory(id) {
 }
 
 function onSuccessfulCategoryCreationUpdate(dialog) {
-    $("#categoryNameInput").val("");
-    $("#categoryDescriptionInput").val("");
+    clearCategoryInputs();
     dialog.dialog("close");
     getCategories();
 }
@@ -118,4 +119,9 @@ function createCategoryFromInputs() {
         name: $("#categoryNameInput").val(),
         description: $("#categoryDescriptionInput").val()
     };
+}
+
+function clearCategoryInputs() {
+    $("#categoryNameInput").val("");
+    $("#categoryDescriptionInput").val("");
 }

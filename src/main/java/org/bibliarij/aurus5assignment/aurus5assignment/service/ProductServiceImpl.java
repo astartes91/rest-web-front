@@ -38,7 +38,7 @@ public class ProductServiceImpl extends EntityServiceImpl implements ProductServ
     @Transactional
     @Override
     public List getAll() {
-        List<Product> result = getRepository().findAll();
+        List<Product> result = repository.findAll();
         result.forEach(ProductServiceImpl::unproxyCategory);
         return result;
     }
@@ -52,7 +52,7 @@ public class ProductServiceImpl extends EntityServiceImpl implements ProductServ
     @Transactional
     @Override
     public Object get(Long id) {
-        Product product = (Product) getRepository().findOne(id);
+        Product product = repository.findOne(id);
         unproxyCategory(product);
         return product;
     }
@@ -78,7 +78,10 @@ public class ProductServiceImpl extends EntityServiceImpl implements ProductServ
      */
     @Override
     public Product update(Product entity) {
-        Preconditions.checkNotNull(entity.getId());
+        Long id = entity.getId();
+        Preconditions.checkNotNull(id);
+        Product entityFromDb = repository.findOne(id);
+        entity.setAdditionDate(entityFromDb.getAdditionDate());
 
         save(entity);
         return entity;

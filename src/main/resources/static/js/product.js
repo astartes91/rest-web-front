@@ -41,6 +41,19 @@ function viewProducts(categoryId) {
                     createNewProduct(categoryId);
                 }
             );
+
+            var category = {};
+            $.get(
+                {
+                    url: "/categories/" + categoryId,
+                    success: function (data) {
+                        category = data;
+                    },
+                    async: false
+                }
+            );
+
+            $("#productsDiv").find("> h3").text("Продукты категории " + category.name);
             $("#productsDiv").show();
         }
     );
@@ -68,7 +81,8 @@ function createNewProduct(categoryId) {
                         }
                     );
                 }
-            }
+            },
+            close: clearProductInputs
         }
     );
 }
@@ -107,7 +121,8 @@ function updateProduct(id) {
                                 }
                             );
                         }
-                    }
+                    },
+                    close: clearProductInputs
                 }
             );
         }
@@ -158,6 +173,20 @@ function fillCategoriesSelect() {
     );
 }
 
+function clearProductInputs() {
+    $("#productNameInput").val("");
+    $("#productDescriptionInput").val("");
+    $("#productManufacturerInput").val("");
+    $("#productPriceInput").val("");
+    $("#productCategorySelect").val("1");
+}
+
+function onSuccessfulProductCreationUpdate(dialog, categoryId) {
+    clearProductInputs();
+    dialog.dialog("close");
+    viewProducts(categoryId);
+}
+
 function createProductFromInputs() {
     return {
         name: $("#productNameInput").val(),
@@ -168,14 +197,4 @@ function createProductFromInputs() {
             id: $("#productCategorySelect").val()
         }
     };
-}
-
-function onSuccessfulProductCreationUpdate(dialog, categoryId) {
-    $("#productNameInput").val("");
-    $("#productDescriptionInput").val("");
-    $("#productManufacturerInput").val("");
-    $("#productPriceInput").val("");
-    $("#productCategorySelect").val("1");
-    dialog.dialog("close");
-    viewProducts(categoryId);
 }
