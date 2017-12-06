@@ -60,7 +60,7 @@ function createNewProduct(categoryId) {
                         {
                             type: "POST",
                             url: "/products",
-                            data: JSON.stringify(createProductFrominputs()),
+                            data: JSON.stringify(createProductFromInputs()),
                             success: function (data) {
                                 onSuccessfulProductCreationUpdate(dialog, categoryId);
                             },
@@ -92,7 +92,7 @@ function updateProduct(id) {
                     title: "Обновить продукт",
                     buttons: {
                         "Обновить": function () {
-                            var product = createProductFrominputs();
+                            var product = createProductFromInputs();
                             product.id = data.id;
 
                             $.ajax(
@@ -158,7 +158,7 @@ function fillCategoriesSelect() {
     );
 }
 
-function createProductFrominputs() {
+function createProductFromInputs() {
     return {
         name: $("#productNameInput").val(),
         description: $("#productDescriptionInput").val(),
