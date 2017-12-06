@@ -27,6 +27,7 @@ public class CategoryServiceImpl extends EntityServiceImpl implements CategorySe
     /**
      * Update existing entity
      *
+     * @should behave correctly
      * @param entity
      * @return
      */
@@ -41,6 +42,7 @@ public class CategoryServiceImpl extends EntityServiceImpl implements CategorySe
     /**
      * Delete entity by id
      *
+     * @should behave correctly
      * @param id
      */
     @Transactional

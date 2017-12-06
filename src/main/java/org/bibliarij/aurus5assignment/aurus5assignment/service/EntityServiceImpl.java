@@ -16,6 +16,7 @@ public abstract class EntityServiceImpl implements EntityService {
     /**
      * Get all entities
      *
+     * @should behave correctly
      * @return
      */
     @Override
@@ -26,6 +27,7 @@ public abstract class EntityServiceImpl implements EntityService {
     /**
      * Get entity by id
      *
+     * @should behave correctly
      * @param id
      * @return
      */
@@ -37,6 +39,7 @@ public abstract class EntityServiceImpl implements EntityService {
     /**
      * Save entity
      *
+     * @should behave correctly
      * @param entity
      * @return
      */
@@ -48,6 +51,7 @@ public abstract class EntityServiceImpl implements EntityService {
     /**
      * Delete entity by id
      *
+     * @should behave correctly
      * @param id
      */
     @Override
