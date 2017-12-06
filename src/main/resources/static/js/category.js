@@ -101,9 +101,7 @@ function deleteCategory(id) {
         {
             url: "/categories/" + id,
             type: "DELETE",
-            success: function (data) {
-                getCategories();
-            }
+            success: getCategories
         }
     );
 }
