@@ -44,12 +44,7 @@ function createNewCategory () {
                         {
                             type: "POST",
                             url: "/categories",
-                            data: JSON.stringify(
-                                {
-                                    name: $("#categoryNameInput").val(),
-                                    description: $("#categoryDescriptionInput").val()
-                                }
-                            ),
+                            data: JSON.stringify(createCategoryFromInputs()),
                             success: function (data) {
                                 onSuccessfulCategoryCreationUpdate(dialog);
                             },
@@ -76,17 +71,15 @@ function updateCategory(id) {
                     title: "Обновить категорию",
                     buttons: {
                         "Обновить": function () {
+
+                            var category = createCategoryFromInputs();
+                            category.id = data.id;
+
                             $.ajax(
                                 {
                                     type: "PUT",
                                     url: "/categories",
-                                    data: JSON.stringify(
-                                        {
-                                            id: data.id,
-                                            name: $("#categoryNameInput").val(),
-                                            description: $("#categoryDescriptionInput").val()
-                                        }
-                                    ),
+                                    data: JSON.stringify(category),
                                     success: function (data) {
                                         onSuccessfulCategoryCreationUpdate(dialog);
                                     },
@@ -118,4 +111,11 @@ function onSuccessfulCategoryCreationUpdate(dialog) {
     $("#categoryDescriptionInput").val("");
     dialog.dialog("close");
     getCategories();
+}
+
+function createCategoryFromInputs() {
+    return {
+        name: $("#categoryNameInput").val(),
+        description: $("#categoryDescriptionInput").val()
+    };
 }

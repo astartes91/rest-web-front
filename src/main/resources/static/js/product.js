@@ -48,26 +48,7 @@ function viewProducts(categoryId) {
 
 function createNewProduct(categoryId) {
 
-    $.get(
-        {
-            url: "/categories",
-            success: function (data) {
-
-                var children = $("#productCategorySelect").children();
-                for (var i = 0; i < children.length; i++){
-                    children[i].remove();
-                }
-
-                for (var i = 0; i < data.length; i++){
-                    var category = data[i];
-                    $("#productCategorySelect").append(
-                        $('<option value="' + category.id + '">' + category.name + '</option>')
-                    );
-                }
-            },
-            async: false
-        }
-    );
+    fillCategoriesSelect();
 
     var dialog = $("#productCreationUpdateDiv").dialog(
         {
@@ -79,28 +60,56 @@ function createNewProduct(categoryId) {
                         {
                             type: "POST",
                             url: "/products",
-                            data: JSON.stringify(
-                                {
-                                    name: $("#productNameInput").val(),
-                                    description: $("#productDescriptionInput").val(),
-                                    manufacturer: $("#productManufacturerInput").val(),
-                                    price: $("#productPriceInput").val(),
-                                    category: {id: $("#productCategorySelect").val()}
-                                }
-                            ),
+                            data: JSON.stringify(createProductFrominputs()),
                             success: function (data) {
-                                $("#productNameInput").val("");
-                                $("#productDescriptionInput").val("");
-                                $("#productManufacturerInput").val("");
-                                $("#productPriceInput").val("");
-                                dialog.dialog("close");
-                                viewProducts(categoryId);
+                                onSuccessfulProductCreationUpdate(dialog, categoryId);
                             },
                             contentType: 'application/json'
                         }
                     );
                 }
             }
+        }
+    );
+}
+
+function updateProduct(id) {
+
+    fillCategoriesSelect();
+
+    $.get(
+        '/products' + id,
+        function (data) {
+            $("#productNameInput").val(data.name);
+            $("#productDescriptionInput").val(data.description);
+            $("#productManufacturerInput").val(data.manufacturer);
+            $("#productPriceInput").val(data.price);
+            $("#productCategorySelect").val(data.category.id);
+            
+            var dialog = $("#productCreationUpdateDiv").dialog(
+                {
+                    width: 400,
+                    title: "Обновить продукт",
+                    buttons: {
+                        "Обновить": function () {
+                            var product = createProductFrominputs();
+                            product.id = data.id;
+
+                            $.ajax(
+                                {
+                                    type: "PUT",
+                                    url: "/products",
+                                    data: JSON.stringify(product),
+                                    success: function (data) {
+                                        onSuccessfulProductCreationUpdate(dialog, product.category.id);
+                                    },
+                                    contentType: 'application/json'
+                                }
+                            );
+                        }
+                    }
+                }
+            );
         }
     );
 }
@@ -124,4 +133,49 @@ function deleteProduct(id) {
             );
         }
     );
+}
+
+function fillCategoriesSelect() {
+    $.get(
+        {
+            url: "/categories",
+            success: function (data) {
+
+                var children = $("#productCategorySelect").children();
+                for (var i = 0; i < children.length; i++) {
+                    children[i].remove();
+                }
+
+                for (var i = 0; i < data.length; i++) {
+                    var category = data[i];
+                    $("#productCategorySelect").append(
+                        $('<option value="' + category.id + '">' + category.name + '</option>')
+                    );
+                }
+            },
+            async: false
+        }
+    );
+}
+
+function createProductFrominputs() {
+    return {
+        name: $("#productNameInput").val(),
+        description: $("#productDescriptionInput").val(),
+        manufacturer: $("#productManufacturerInput").val(),
+        price: $("#productPriceInput").val(),
+        category: {
+            id: $("#productCategorySelect").val()
+        }
+    };
+}
+
+function onSuccessfulProductCreationUpdate(dialog, categoryId) {
+    $("#productNameInput").val("");
+    $("#productDescriptionInput").val("");
+    $("#productManufacturerInput").val("");
+    $("#productPriceInput").val("");
+    $("#productCategorySelect").val("1");
+    dialog.dialog("close");
+    viewProducts(categoryId);
 }
