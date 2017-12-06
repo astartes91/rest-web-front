@@ -94,11 +94,14 @@ function updateProduct(id) {
     $.get(
         '/products/' + id,
         function (data) {
+
+            var oldCategoryId = data.category.id;
+
             $("#productNameInput").val(data.name);
             $("#productDescriptionInput").val(data.description);
             $("#productManufacturerInput").val(data.manufacturer);
             $("#productPriceInput").val(data.price);
-            $("#productCategorySelect").val(data.category.id);
+            $("#productCategorySelect").val(oldCategoryId);
             
             var dialog = $("#productCreationUpdateDiv").dialog(
                 {
@@ -115,7 +118,7 @@ function updateProduct(id) {
                                     url: "/products",
                                     data: JSON.stringify(product),
                                     success: function (data) {
-                                        onSuccessfulProductCreationUpdate(dialog, product.category.id);
+                                        onSuccessfulProductCreationUpdate(dialog, oldCategoryId);
                                     },
                                     contentType: 'application/json'
                                 }
