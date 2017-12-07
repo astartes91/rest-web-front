@@ -15,4 +15,11 @@ public interface CategoryService extends EntityService {
      * @return
      */
     Category update(Category entity);
+
+    /**
+     * Unproxy category
+     * @param category
+     * @return
+     */
+    Category unproxy(Category category);
 }

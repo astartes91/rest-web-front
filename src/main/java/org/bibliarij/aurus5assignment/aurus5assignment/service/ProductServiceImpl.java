@@ -1,11 +1,8 @@
 package org.bibliarij.aurus5assignment.aurus5assignment.service;
 
 import com.google.common.base.Preconditions;
-import org.bibliarij.aurus5assignment.aurus5assignment.entity.Category;
 import org.bibliarij.aurus5assignment.aurus5assignment.entity.Product;
 import org.bibliarij.aurus5assignment.aurus5assignment.repository.ProductRepository;
-import org.hibernate.Hibernate;
-import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -22,8 +19,15 @@ import java.util.List;
 @Service
 public class ProductServiceImpl extends EntityServiceImpl implements ProductService {
 
-    @Autowired
+
+    private CategoryService categoryService;
     private ProductRepository repository;
+
+    @Autowired
+    public ProductServiceImpl(CategoryService categoryService, ProductRepository repository) {
+        this.categoryService = categoryService;
+        this.repository = repository;
+    }
 
     @Override
     protected JpaRepository getRepository() {
@@ -33,19 +37,21 @@ public class ProductServiceImpl extends EntityServiceImpl implements ProductServ
     /**
      * Get all entities
      *
+     * @should return correct result
      * @return
      */
     @Transactional
     @Override
     public List getAll() {
         List<Product> result = repository.findAll();
-        result.forEach(ProductServiceImpl::unproxyCategory);
+        result.stream().peek(product -> product.setCategory(categoryService.unproxy(product.getCategory()))).findAny();
         return result;
     }
 
     /**
      * Get entity by id
      *
+     * @should return correct result
      * @param id
      * @return
      */
@@ -53,13 +59,14 @@ public class ProductServiceImpl extends EntityServiceImpl implements ProductServ
     @Override
     public Object get(Long id) {
         Product product = repository.findOne(id);
-        unproxyCategory(product);
+        product.setCategory(categoryService.unproxy(product.getCategory()));
         return product;
     }
 
     /**
      * Create new entity
      *
+     * @should return correct result
      * @param entity
      * @return
      */
@@ -73,6 +80,7 @@ public class ProductServiceImpl extends EntityServiceImpl implements ProductServ
     /**
      * Update existing entity
      *
+     * @should return correct result
      * @param entity
      * @return
      */
@@ -90,22 +98,16 @@ public class ProductServiceImpl extends EntityServiceImpl implements ProductServ
     /**
      * Get products by category id
      *
+     * @should return correct result
      * @param categoryId
      * @return
      */
     @Override
     public List<Product> getProductsByCategoryId(Long categoryId) {
         List<Product> products = repository.getByCategoryId(categoryId);
-        products.forEach(ProductServiceImpl::unproxyCategory);
+        products.stream()
+                .peek(product -> product.setCategory(categoryService.unproxy(product.getCategory())))
+                .findAny();
         return products;
-    }
-
-    private static void unproxyCategory(Product product) {
-        Category category = product.getCategory();
-        Hibernate.initialize(category);
-        category = (Category) ((HibernateProxy) category)
-                .getHibernateLazyInitializer()
-                .getImplementation();
-        product.setCategory(category);
     }
 }
