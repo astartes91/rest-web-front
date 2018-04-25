@@ -1,7 +1,7 @@
-package org.bibliarij.aurus5assignment.aurus5assignment.controller;
+package org.bibliarij.restwithwebfront.controller;
 
 import io.swagger.annotations.ApiOperation;
-import org.bibliarij.aurus5assignment.aurus5assignment.service.EntityService;
+import org.bibliarij.restwithwebfront.service.EntityService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -1,4 +1,4 @@
-package org.bibliarij.aurus5assignment.aurus5assignment.entity;
+package org.bibliarij.restwithwebfront.entity;
 
 import lombok.Data;
 

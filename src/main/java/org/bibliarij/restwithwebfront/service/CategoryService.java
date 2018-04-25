@@ -1,6 +1,6 @@
-package org.bibliarij.aurus5assignment.aurus5assignment.service;
+package org.bibliarij.restwithwebfront.service;
 
-import org.bibliarij.aurus5assignment.aurus5assignment.entity.Category;
+import org.bibliarij.restwithwebfront.entity.Category;
 
 /**
  * Service for {@link Category} entity

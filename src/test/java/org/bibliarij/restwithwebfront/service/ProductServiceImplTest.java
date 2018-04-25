@@ -1,9 +1,9 @@
-package org.bibliarij.aurus5assignment.aurus5assignment.service;
+package org.bibliarij.restwithwebfront.service;
 
 import org.assertj.core.api.Assertions;
-import org.bibliarij.aurus5assignment.aurus5assignment.entity.Category;
-import org.bibliarij.aurus5assignment.aurus5assignment.entity.Product;
-import org.bibliarij.aurus5assignment.aurus5assignment.repository.ProductRepository;
+import org.bibliarij.restwithwebfront.entity.Category;
+import org.bibliarij.restwithwebfront.entity.Product;
+import org.bibliarij.restwithwebfront.repository.ProductRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

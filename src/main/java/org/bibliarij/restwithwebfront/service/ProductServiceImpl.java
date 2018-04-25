@@ -1,8 +1,8 @@
-package org.bibliarij.aurus5assignment.aurus5assignment.service;
+package org.bibliarij.restwithwebfront.service;
 
 import com.google.common.base.Preconditions;
-import org.bibliarij.aurus5assignment.aurus5assignment.entity.Product;
-import org.bibliarij.aurus5assignment.aurus5assignment.repository.ProductRepository;
+import org.bibliarij.restwithwebfront.entity.Product;
+import org.bibliarij.restwithwebfront.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

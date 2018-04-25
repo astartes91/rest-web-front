@@ -1,10 +1,10 @@
-package org.bibliarij.aurus5assignment.aurus5assignment.controller;
+package org.bibliarij.restwithwebfront.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.bibliarij.aurus5assignment.aurus5assignment.entity.Product;
-import org.bibliarij.aurus5assignment.aurus5assignment.service.EntityService;
-import org.bibliarij.aurus5assignment.aurus5assignment.service.ProductService;
+import org.bibliarij.restwithwebfront.entity.Product;
+import org.bibliarij.restwithwebfront.service.EntityService;
+import org.bibliarij.restwithwebfront.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

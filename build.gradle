@@ -1,4 +1,4 @@
-group = 'org.bibliarij.aurus5assignment'
+group = 'org.bibliarij.restwithwebfront'
 version = '0.0.1-SNAPSHOT'
 
 buildscript {

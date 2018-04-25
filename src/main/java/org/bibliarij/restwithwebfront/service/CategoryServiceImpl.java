@@ -1,9 +1,9 @@
-package org.bibliarij.aurus5assignment.aurus5assignment.service;
+package org.bibliarij.restwithwebfront.service;
 
 import com.google.common.base.Preconditions;
-import org.bibliarij.aurus5assignment.aurus5assignment.entity.Category;
-import org.bibliarij.aurus5assignment.aurus5assignment.repository.CategoryRepository;
-import org.bibliarij.aurus5assignment.aurus5assignment.repository.ProductRepository;
+import org.bibliarij.restwithwebfront.entity.Category;
+import org.bibliarij.restwithwebfront.repository.CategoryRepository;
+import org.bibliarij.restwithwebfront.repository.ProductRepository;
 import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;

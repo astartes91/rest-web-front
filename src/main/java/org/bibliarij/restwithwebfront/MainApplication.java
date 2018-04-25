@@ -1,4 +1,4 @@
-package org.bibliarij.aurus5assignment.aurus5assignment;
+package org.bibliarij.restwithwebfront;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

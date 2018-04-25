@@ -1,4 +1,4 @@
-package org.bibliarij.aurus5assignment.aurus5assignment.service;
+package org.bibliarij.restwithwebfront.service;
 
 import java.util.List;
 

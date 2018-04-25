@@ -1,6 +1,6 @@
-package org.bibliarij.aurus5assignment.aurus5assignment.repository;
+package org.bibliarij.restwithwebfront.repository;
 
-import org.bibliarij.aurus5assignment.aurus5assignment.entity.Category;
+import org.bibliarij.restwithwebfront.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
